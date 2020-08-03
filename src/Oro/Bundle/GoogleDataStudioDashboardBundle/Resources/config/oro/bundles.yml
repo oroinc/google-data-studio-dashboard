@@ -1,0 +1,2 @@
+bundles:
+    - { name: Oro\Bundle\GoogleDataStudioDashboardBundle\OroGoogleDataStudioDashboardBundle, priority: 1000 }

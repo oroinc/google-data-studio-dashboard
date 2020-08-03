@@ -1,0 +1,26 @@
+{
+  "name": "oro/google-data-studio-dashboard",
+  "description": "Back-office dashboard with embedded Google Data Studio report",
+  "license": "OSL-3.0",
+  "keywords": ["Oro", "Google Data Studio"],
+  "authors": [
+    {
+      "name": "Oro, Inc",
+      "homepage": "https://www.orocommerce.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {"Oro\\Bundle\\GoogleDataStudioDashboardBundle\\": "src/Oro/Bundle/GoogleDataStudioDashboardBundle"},
+    "exclude-from-classmap": ["/Tests/"]
+  },
+  "require": {
+    "oro/platform": "~4.1.7"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "extra": {
+    "branch-alias": {
+      "dev-master": "4.1-dev"
+    }
+  }
+}

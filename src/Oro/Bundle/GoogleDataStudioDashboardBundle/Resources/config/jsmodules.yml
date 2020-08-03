@@ -1,0 +1,3 @@
+dynamic-imports:
+    orogoogledatastudiodashboard:
+        - orogoogledatastudiodashboard/js/app/components/google-data-studio-dashboard-component

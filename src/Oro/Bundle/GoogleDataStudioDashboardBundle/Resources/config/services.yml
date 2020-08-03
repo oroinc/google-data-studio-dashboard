@@ -1,0 +1,5 @@
+services:
+    oro_google_data_studio_dashboard.extension.dashboard:
+        class: Oro\Bundle\GoogleDataStudioDashboardBundle\Form\Extension\DashboardTypeExtension
+        tags:
+            - { name: form.type_extension, alias: oro_google_data_studio_dashboard, extended_type: Oro\Bundle\DashboardBundle\Form\Type\DashboardType }
