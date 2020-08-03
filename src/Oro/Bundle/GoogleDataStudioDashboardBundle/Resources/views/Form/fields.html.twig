@@ -1,0 +1,10 @@
+{% block _oro_dashboard_type_widget %}
+    {% import 'OroUIBundle::macros.html.twig' as UI %}
+
+    <div {{ UI.renderPageComponentAttributes({
+        module: 'orogoogledatastudiodashboard/js/app/components/google-data-studio-dashboard-component',
+        name: 'google-data-studio-dashboard'
+    }) }}>
+        {{ block('form') }}
+    </div>
+{% endblock %}
