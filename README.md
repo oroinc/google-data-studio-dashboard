@@ -6,4 +6,4 @@
 
 ## Overview
 
-Allows to embed Google Data Studio report in back-office dashboard.
+Enables embedding Google Data Studio reports into the back-office dashboard.
