@@ -1,5 +1,6 @@
 {
   "name": "oro/google-data-studio-dashboard",
+  "homepage": "https://github.com/oroinc/google-data-studio-dashboard/",
   "description": "Back-office dashboard with embedded Google Data Studio report",
   "license": "OSL-3.0",
   "keywords": ["Oro", "Google Data Studio"],
