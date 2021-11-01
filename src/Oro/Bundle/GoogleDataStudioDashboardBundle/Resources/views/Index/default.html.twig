@@ -36,7 +36,7 @@
                             }) }}>
                                 {% for dashboardModel in dashboards %}
                                     <option value="{{ dashboardModel.id }}"{% if dashboardModel.id == dashboard.id %} selected="selected"{% endif %}>
-                                        {{ dashboardModel.getLabel()|truncate(50) }}
+                                        {{ dashboardModel.getLabel()|slice(0, 50)}}
                                     </option>
                                 {% endfor %}
                             </select>
@@ -105,4 +105,4 @@
         ></iframe>
     </div>
 </div>
-{% endblock content %}
+{% endblock %}
