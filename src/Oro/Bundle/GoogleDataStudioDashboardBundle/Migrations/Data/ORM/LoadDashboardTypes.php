@@ -2,11 +2,47 @@
 
 namespace Oro\Bundle\GoogleDataStudioDashboardBundle\Migrations\Data\ORM;
 
+use Doctrine\Persistence\ObjectManager;
+use Oro\Bundle\EntityExtendBundle\Entity\Repository\EnumValueRepository;
 use Oro\Bundle\EntityExtendBundle\Migration\Fixture\AbstractEnumFixture;
+use Oro\Bundle\EntityExtendBundle\Tools\ExtendHelper;
 use Oro\Bundle\GoogleDataStudioDashboardBundle\Model\DashboardEnums;
 
 class LoadDashboardTypes extends AbstractEnumFixture
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function load(ObjectManager $manager)
+    {
+        $className = ExtendHelper::buildEnumValueClassName($this->getEnumCode());
+        /** @var EnumValueRepository $enumRepo */
+        $enumRepo = $manager->getRepository($className);
+
+        $valuesToInsert = $this->getData();
+        $existingValues = $enumRepo->getValues();
+
+        // Removing already existing values that should not be added
+        // In case similar extensions like oro/microsoft-power-bi-dashboard are already installed
+        foreach ($existingValues as $existingValue) {
+            if (array_key_exists($existingValue->getId(), $valuesToInsert)) {
+                unset($valuesToInsert[$existingValue->getId()]);
+            }
+        }
+        // Persisting values
+        foreach ($valuesToInsert as $id => $name) {
+            $priority = match($id) {
+                $this->getDefaultValue() => 1,
+                default => 2
+            };
+            $isDefault = $id === $this->getDefaultValue();
+            $enumOption = $enumRepo->createEnumValue($name, $priority, $isDefault, $id);
+            $manager->persist($enumOption);
+        }
+
+        $manager->flush();
+    }
+
     /**
      * {@inheritdoc}
      */

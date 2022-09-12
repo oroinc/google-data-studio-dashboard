@@ -46,45 +46,53 @@ class OroGoogleDataStudioDashboardBundleInstaller implements Installation, Exten
     {
         $table = $schema->getTable('oro_dashboard');
 
-        $this->extendExtension->addEnumField(
-            $schema,
-            $table,
-            DashboardFields::TYPE,
-            DashboardEnums::DASHBOARD_TYPE_CODE,
+        // We implement the enum only if it was not implemented by another similar extension
+        // See oro/microsoft-power-bi-dashboard for example
+        if (!$schema->hasTable('oro_enum_dashboard_type')) {
+            $this->extendExtension->addEnumField(
+                $schema,
+                $table,
+                DashboardFields::TYPE,
+                DashboardEnums::DASHBOARD_TYPE_CODE,
 
-            false,
-            false,
-            [
-                'extend'    => [
-                    'is_extend' => true,
-                    'owner'     => ExtendScope::OWNER_CUSTOM,
-                ],
-                'datagrid'  => ['is_visible' => DatagridScope::IS_VISIBLE_TRUE, 'show_filter' => true],
-                'form'      => ['is_enabled' => true],
-                'view'      => ['is_displayable' => false, 'priority' => 2],
-                'merge'     => ['display' => false],
-                'dataaudit' => ['auditable' => false]
-            ]
-        );
-
-        $table->addColumn(
-            DashboardFields::EMBED_URL,
-            Types::STRING,
-            [
-                'notnull'     => false,
-                'length'      => 8190,
-                'oro_options' => [
-                    'extend'    => [
+                false,
+                false,
+                [
+                    'extend' => [
                         'is_extend' => true,
-                        'owner'     => ExtendScope::OWNER_CUSTOM,
+                        'owner' => ExtendScope::OWNER_CUSTOM,
                     ],
-                    'datagrid'  => ['is_visible' => DatagridScope::IS_VISIBLE_FALSE, 'show_filter' => false],
-                    'form'      => ['is_enabled' => true],
-                    'view'      => ['is_displayable' => false, 'priority' => 1],
-                    'merge'     => ['display' => false],
+                    'datagrid' => ['is_visible' => DatagridScope::IS_VISIBLE_TRUE, 'show_filter' => true],
+                    'form' => ['is_enabled' => true],
+                    'view' => ['is_displayable' => false, 'priority' => 2],
+                    'merge' => ['display' => false],
                     'dataaudit' => ['auditable' => false]
                 ]
-            ]
-        );
+            );
+        }
+
+        // We implement the column only if it was not implemented by another similar extension
+        // See oro/microsoft-power-bi-dashboard for example
+        if (!$table->hasColumn(DashboardFields::EMBED_URL)) {
+            $table->addColumn(
+                DashboardFields::EMBED_URL,
+                Types::STRING,
+                [
+                    'notnull'     => false,
+                    'length'      => 8190,
+                    'oro_options' => [
+                        'extend'    => [
+                            'is_extend' => true,
+                            'owner'     => ExtendScope::OWNER_CUSTOM,
+                        ],
+                        'datagrid'  => ['is_visible' => DatagridScope::IS_VISIBLE_FALSE, 'show_filter' => false],
+                        'form'      => ['is_enabled' => true],
+                        'view'      => ['is_displayable' => false, 'priority' => 1],
+                        'merge'     => ['display' => false],
+                        'dataaudit' => ['auditable' => false]
+                    ]
+                ]
+            );
+        }
     }
 }

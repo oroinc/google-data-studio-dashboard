@@ -15,7 +15,7 @@
     "exclude-from-classmap": ["/Tests/"]
   },
   "require": {
-    "oro/platform": "~5.0.0"
+    "oro/platform": "5.0.*"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,

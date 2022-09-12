@@ -1,6 +1,9 @@
 {% extends bap.layout %}
+
 {% import '@OroUI/macros.html.twig' as UI %}
+
 {% oro_title_set({params : {"%name%": dashboard.getLabel() }}) %}
+
 {% block breadcrumb %}
     {% set breadcrumbs = [
         {'label': 'oro.dashboard.menu.dashboards_tab.label'|trans },
@@ -8,6 +11,7 @@
     ] %}
     {% include '@OroNavigation/Menu/breadcrumbs.html.twig' %}
 {% endblock breadcrumb %}
+
 {% block content %}
 {% import '@OroUI/macros.html.twig' as UI %}
 
@@ -36,7 +40,7 @@
                             }) }}>
                                 {% for dashboardModel in dashboards %}
                                     <option value="{{ dashboardModel.id }}"{% if dashboardModel.id == dashboard.id %} selected="selected"{% endif %}>
-                                        {{ dashboardModel.getLabel()|slice(0, 50)}}
+                                        {{ dashboardModel.getLabel() }}
                                     </option>
                                 {% endfor %}
                             </select>
@@ -105,4 +109,4 @@
         ></iframe>
     </div>
 </div>
-{% endblock %}
+{% endblock content %}

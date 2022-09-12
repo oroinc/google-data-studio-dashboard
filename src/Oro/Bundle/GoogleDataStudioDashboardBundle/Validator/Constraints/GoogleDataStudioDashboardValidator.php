@@ -9,9 +9,11 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class GoogleDataStudioDashboardValidator extends ConstraintValidator
 {
+    public const DATA_STUDIO_URL_EMBED_PATTERN = '/^https:\/\/datastudio\.google\.com\/embed\/reporting[a-zA-Z0-9\/\-_]*$/';
+
     /**
      * @param Dashboard|object $value
-     * @param GoogleDataStudioDashboard    $constraint
+     * @param GoogleDataStudioDashboard $constraint
      *
      * {@inheritdoc}
      */
@@ -33,16 +35,19 @@ class GoogleDataStudioDashboardValidator extends ConstraintValidator
 
         if (!$value->getStartDashboard()) {
             if (!$value->getType()) {
-                $this->context->buildViolation($constraint->message)
+                $this->context->buildViolation($constraint->blankMessage)
                     ->atPath('type')
                     ->addViolation();
-            } elseif (
-                $value->getType()->getId() === DashboardEnums::TYPE_GOOGLE_DATA_STUDIO
-                && !$value->getEmbedUrl()
-            ) {
-                $this->context->buildViolation($constraint->message)
-                    ->atPath('embed_url')
-                    ->addViolation();
+            } elseif ($value->getType()->getId() === DashboardEnums::TYPE_GOOGLE_DATA_STUDIO) {
+                if (!$value->getEmbedUrl()) {
+                    $this->context->buildViolation($constraint->blankMessage)
+                        ->atPath('embed_url')
+                        ->addViolation();
+                } elseif (!preg_match(self::DATA_STUDIO_URL_EMBED_PATTERN, $value->getEmbedUrl())) {
+                    $this->context->buildViolation($constraint->patternMessage)
+                        ->atPath('embed_url')
+                        ->addViolation();
+                }
             }
         }
     }
