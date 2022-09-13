@@ -1,4 +1,4 @@
 dashboards:
     dashboards:
         google_data_studio:
-            twig: OroGoogleDataStudioDashboardBundle:Index:default.html.twig
+            twig: '@OroGoogleDataStudioDashboard/Index/default.html.twig'

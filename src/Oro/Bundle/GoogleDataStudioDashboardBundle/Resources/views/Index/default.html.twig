@@ -1,15 +1,15 @@
 {% extends bap.layout %}
-{% import 'OroUIBundle::macros.html.twig' as UI %}
+{% import '@OroUI/macros.html.twig' as UI %}
 {% oro_title_set({params : {"%name%": dashboard.getLabel() }}) %}
 {% block breadcrumb %}
     {% set breadcrumbs = [
         {'label': 'oro.dashboard.menu.dashboards_tab.label'|trans },
         {'label': dashboard.getLabel() }
     ] %}
-    {% include 'OroNavigationBundle:Menu:breadcrumbs.html.twig' %}
+    {% include '@OroNavigation/Menu/breadcrumbs.html.twig' %}
 {% endblock breadcrumb %}
 {% block content %}
-{% import 'OroUIBundle::macros.html.twig' as UI %}
+{% import '@OroUI/macros.html.twig' as UI %}
 
 <div class="layout-content dashboard-container-wrapper">
     <div class="container-fluid page-title">
@@ -26,7 +26,7 @@
                 {% endblock title %}
 
                 {% block navButtons %}
-                    {% import 'OroUIBundle::macros.html.twig' as UI %}
+                    {% import '@OroUI/macros.html.twig' as UI %}
 
                     {% if dashboards|length > 1 %}
                         <div class="dashboard-selector-container pull-right">

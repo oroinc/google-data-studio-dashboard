@@ -1,2 +1,2 @@
 bundles:
-    - OroGoogleDataStudioDashboardBundle:Form:fields.html.twig
+    - '@OroGoogleDataStudioDashboard/Form/fields.html.twig'
