@@ -9,8 +9,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class OroGoogleDataStudioDashboardExtension extends Extension
 {
-    const ALIAS = 'oro_google_data_studio_dashboard';
-
     /**
      * {@inheritDoc}
      */
@@ -18,13 +16,5 @@ class OroGoogleDataStudioDashboardExtension extends Extension
     {
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getAlias(): string
-    {
-        return self::ALIAS;
     }
 }

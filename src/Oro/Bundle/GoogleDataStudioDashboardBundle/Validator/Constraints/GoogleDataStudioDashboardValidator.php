@@ -9,7 +9,10 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class GoogleDataStudioDashboardValidator extends ConstraintValidator
 {
-    public const DATA_STUDIO_URL_EMBED_PATTERN = '/^https:\/\/datastudio\.google\.com\/embed\/reporting[a-zA-Z0-9\/\-_]*$/';
+    private const DATA_STUDIO_URL_START = 'https://datastudio.google.com/embed/reporting/';
+
+    private const DATA_STUDIO_URL_EMBED_PATTERN =
+        '/^https:\/\/datastudio\.google\.com\/embed\/reporting[a-zA-Z0-9\/\-_]*$/';
 
     /**
      * @param Dashboard|object $value
@@ -44,7 +47,10 @@ class GoogleDataStudioDashboardValidator extends ConstraintValidator
                         ->atPath('embed_url')
                         ->addViolation();
                 } elseif (!preg_match(self::DATA_STUDIO_URL_EMBED_PATTERN, $value->getEmbedUrl())) {
-                    $this->context->buildViolation($constraint->patternMessage)
+                    $this->context->buildViolation(
+                        $constraint->patternMessage,
+                        ['%urlStart%' => self::DATA_STUDIO_URL_START]
+                    )
                         ->atPath('embed_url')
                         ->addViolation();
                 }
