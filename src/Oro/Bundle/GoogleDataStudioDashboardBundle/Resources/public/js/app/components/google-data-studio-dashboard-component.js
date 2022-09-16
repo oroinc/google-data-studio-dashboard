@@ -111,7 +111,7 @@ define(function(require) {
             this.fields = {};
 
             GoogleDataStudioDashboardComponent.__super__.dispose.call(this);
-        },
+        }
     });
 
     return GoogleDataStudioDashboardComponent;

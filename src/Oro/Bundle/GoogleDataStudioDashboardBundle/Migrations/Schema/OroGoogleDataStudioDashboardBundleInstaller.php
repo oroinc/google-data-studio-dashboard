@@ -13,15 +13,9 @@ use Oro\Bundle\GoogleDataStudioDashboardBundle\Model\DashboardFields;
 use Oro\Bundle\MigrationBundle\Migration\Installation;
 use Oro\Bundle\MigrationBundle\Migration\QueryBag;
 
-/**
- * ORO installer for GoogleDataStudioDashboardBundle.
- */
 class OroGoogleDataStudioDashboardBundleInstaller implements Installation, ExtendExtensionAwareInterface
 {
-    /**
-     * @var ExtendExtension
-     */
-    protected $extendExtension;
+    protected ExtendExtension $extendExtension;
 
     /**
      * {@inheritdoc}
@@ -54,7 +48,6 @@ class OroGoogleDataStudioDashboardBundleInstaller implements Installation, Exten
                 $table,
                 DashboardFields::TYPE,
                 DashboardEnums::DASHBOARD_TYPE_CODE,
-
                 false,
                 false,
                 [
