@@ -4,7 +4,7 @@ namespace Oro\Bundle\GoogleDataStudioDashboardBundle\Form\Extension;
 
 use Oro\Bundle\DashboardBundle\Entity\Dashboard;
 use Oro\Bundle\DashboardBundle\Form\Type\DashboardType;
-use Oro\Bundle\GoogleDataStudioDashboardBundle\Model\DashboardEnums;
+use Oro\Bundle\GoogleDataStudioDashboardBundle\DashboardType\GoogleDataStudoDashboardTypeConfigProvider;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -32,11 +32,10 @@ class DashboardTypeExtension extends AbstractTypeExtension
             /** @var Dashboard $dashboard */
             $dashboard = $event->getData();
             if ($dashboard->getStartDashboard()) {
-                $dashboard->setType($dashboard->getStartDashboard()->getType());
                 $dashboard->setEmbedUrl($dashboard->getStartDashboard()->getEmbedUrl());
             }
 
-            if ($dashboard->getType() && $dashboard->getType()->getId() === DashboardEnums::TYPE_GOOGLE_DATA_STUDIO) {
+            if ($dashboard->getDashboardType() && $dashboard->getDashboardType()->getId() === GoogleDataStudoDashboardTypeConfigProvider::TYPE_NAME) {
                 $dashboard->setName(self::GOOGLE_DATA_STUDIO_DASHBOARD_NAME);
             }
         });
@@ -49,14 +48,9 @@ class DashboardTypeExtension extends AbstractTypeExtension
     {
         /** @var Dashboard $dashboard */
         $dashboard = $view->vars['value'];
-        $view->children['type']->vars['required'] = true;
         $view->children['embed_url']->vars['required'] = true;
 
-        if ($dashboard->getId()) {
-            $view->children['type']->vars['attr']['readonly'] = true;
-        }
-
-        if (!$dashboard->getType() || $dashboard->getType()->getId() !== DashboardEnums::TYPE_GOOGLE_DATA_STUDIO) {
+        if (!$dashboard->getDashboardType() || $dashboard->getDashboardType()->getId() !== GoogleDataStudoDashboardTypeConfigProvider::TYPE_NAME) {
             $view->children['embed_url']->vars['attr']['class'] = 'hide';
         }
     }

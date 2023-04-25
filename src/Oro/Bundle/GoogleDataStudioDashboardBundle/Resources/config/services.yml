@@ -3,3 +3,9 @@ services:
         class: Oro\Bundle\GoogleDataStudioDashboardBundle\Form\Extension\DashboardTypeExtension
         tags:
             - { name: form.type_extension, alias: oro_google_data_studio_dashboard, extended_type: Oro\Bundle\DashboardBundle\Form\Type\DashboardType }
+
+    oro_google_data_studio_dashboard.dashboard_type.data_studio:
+        class: Oro\Bundle\GoogleDataStudioDashboardBundle\DashboardType\GoogleDataStudoDashboardTypeConfigProvider
+        tags:
+            - { name: oro_dashboard.dashboard_type.config.provider }
+

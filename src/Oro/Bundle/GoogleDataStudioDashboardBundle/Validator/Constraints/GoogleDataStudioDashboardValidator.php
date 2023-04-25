@@ -3,8 +3,8 @@
 namespace Oro\Bundle\GoogleDataStudioDashboardBundle\Validator\Constraints;
 
 use Oro\Bundle\DashboardBundle\Entity\Dashboard;
-use Oro\Bundle\GoogleDataStudioDashboardBundle\Model\DashboardEnums;
 use Symfony\Component\Validator\Constraint;
+use Oro\Bundle\GoogleDataStudioDashboardBundle\DashboardType\GoogleDataStudoDashboardTypeConfigProvider;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class GoogleDataStudioDashboardValidator extends ConstraintValidator
@@ -37,11 +37,11 @@ class GoogleDataStudioDashboardValidator extends ConstraintValidator
         }
 
         if (!$value->getStartDashboard()) {
-            if (!$value->getType()) {
+            if (!$value->getDashboardType()) {
                 $this->context->buildViolation($constraint->blankMessage)
                     ->atPath('type')
                     ->addViolation();
-            } elseif ($value->getType()->getId() === DashboardEnums::TYPE_GOOGLE_DATA_STUDIO) {
+            } elseif ($value->getDashboardType()->getId() === GoogleDataStudoDashboardTypeConfigProvider::TYPE_NAME) {
                 if (!$value->getEmbedUrl()) {
                     $this->context->buildViolation($constraint->blankMessage)
                         ->atPath('embed_url')

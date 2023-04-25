@@ -1,4 +1,3 @@
 oro:
     dashboard:
-        type.label: Type
         embed_url.label: Embed URL

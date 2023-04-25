@@ -27,7 +27,7 @@ class DashboardControllerTest extends WebTestCase
 
         $createForm = $crawler->selectButton('Save and Close')->form();
         $createForm['oro_dashboard[label]'] = 'Google Data Studio Dashboard';
-        $createForm['oro_dashboard[type]'] = 'google_data_studio';
+        $createForm['oro_dashboard[DashboardType]'] = 'google_data_studio';
         $createForm['oro_dashboard[embed_url]'] = 'https://datastudio.google.com/embed/reporting/test';
 
         $this->client->followRedirects(true);
@@ -55,7 +55,7 @@ class DashboardControllerTest extends WebTestCase
 
         $createForm = $crawler->selectButton('Save and Close')->form();
         $createForm['oro_dashboard[label]'] = 'Google Data Studio Dashboard Update';
-        $createForm['oro_dashboard[type]'] = 'google_data_studio';
+        $createForm['oro_dashboard[DashboardType]'] = 'google_data_studio';
         $createForm['oro_dashboard[embed_url]'] = 'https://datastudio.google.com/embed/reporting/test';
 
         $this->client->followRedirects(true);

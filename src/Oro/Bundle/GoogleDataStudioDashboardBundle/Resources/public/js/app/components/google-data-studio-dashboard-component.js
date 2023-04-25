@@ -13,10 +13,10 @@ define(function(require) {
          * @property {Object}
          */
         options: {
-            defaultValueId: 'widgets',
+            defaultValueIds: ['widgets', 'seller_dashboard'],
             googleDataStudioId: 'google_data_studio',
             selectors: {
-                type: '[name="oro_dashboard[type]"]',
+                type: '[name="oro_dashboard[dashboardType]"]',
                 embedUrl: '[name="oro_dashboard[embed_url]"]',
                 startDashboard: '[name="oro_dashboard[startDashboard]"]',
             }
@@ -58,22 +58,10 @@ define(function(require) {
 
         onStartDashboardChanged: function(e) {
             if (e.target.value !== '') {
-                this._hideType();
                 this._hideEmbedUrl();
             } else {
-                this._showType();
                 this._showEmbedUrl();
             }
-        },
-
-        _hideType: function() {
-            this.fields.type.addClass('hide');
-            this.fields.type.closest('div.control-group').addClass('hide');
-        },
-
-        _showType: function() {
-            this.fields.type.removeClass('hide');
-            this.fields.type.closest('div.control-group').removeClass('hide');
         },
 
         _hideEmbedUrl: function() {
@@ -96,7 +84,7 @@ define(function(require) {
             // We show the embed_url field if we selected this value or not the default one
             // Fallback in case we have several similar dashboards extensions enabled
             return this.isValueSelected()
-                || (this.fields.type.val() !== '' && this.fields.type.val() !== this.options.defaultValueId);
+                || (this.fields.type.val() !== '' && !this.options.defaultValueIds.includes(this.fields.type.val()));
         },
 
         /**
