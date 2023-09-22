@@ -9,10 +9,11 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class GoogleDataStudioDashboardValidator extends ConstraintValidator
 {
-    private const DATA_STUDIO_URL_START = 'https://datastudio.google.com/embed/reporting/';
+    private const DATA_STUDIO_URL_START =
+        'https://datastudio.google.com/embed/reporting/ or https://lookerstudio.google.com/embed/reporting/';
 
     private const DATA_STUDIO_URL_EMBED_PATTERN =
-        '/^https:\/\/datastudio\.google\.com\/embed\/reporting[a-zA-Z0-9\/\-_]*$/';
+        '/^https:\/\/(?:datastudio|lookerstudio)\.google\.com\/embed\/reporting[a-zA-Z0-9\/\-_]*$/';
 
     /**
      * @param Dashboard|object $value
